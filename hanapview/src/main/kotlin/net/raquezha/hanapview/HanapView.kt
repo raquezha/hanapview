@@ -670,7 +670,7 @@ class HanapView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
 
     companion object {
         val CARD_CORNER_RADIUS = 4
-        val ANIMATION_CENTER_PADDING = 26
+        val ANIMATION_CENTER_PADDING = 56
         val CARD_PADDING = 6
         val CARD_ELEVATION = 2
         val BACK_ICON_ALPHA_DEFAULT = 0.87f

@@ -12,6 +12,13 @@ import androidx.appcompat.widget.Toolbar
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.tabs.TabLayout
 import net.raquezha.hanapview.HanapView
+import android.R.attr.data
+import android.util.TypedValue
+import android.app.Activity
+
+
+
+
 
 class Main : AppCompatActivity() {
     private var searchView: HanapView? = null
@@ -38,15 +45,48 @@ class Main : AppCompatActivity() {
         //        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         //        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
 
+
+
         val statusBarHeight = getStatusBarHeight(this@Main)
-        //log("statusBartHeight: $statusBarHeight")
+
         val params = toolbar.layoutParams as FrameLayout.LayoutParams
         params.setMargins(0, statusBarHeight, 0, 0)
+        toolbar.layoutParams = params
 
         val params2 = searchView?.layoutParams as FrameLayout.LayoutParams
-        params.setMargins(0, statusBarHeight, 0, 0)
-        toolbar.layoutParams = params
+        params2.height = getActionBarHeight(this@Main) + statusBarHeight
         searchView?.layoutParams = params2
+
+    }
+
+    fun getActionBarHeight(activity: Activity): Int {
+
+        var actionBarHeight = 0
+        val typedValue = TypedValue()
+
+        try {
+
+            if (activity
+                    .theme
+                    .resolveAttribute(
+                        android.R.attr.actionBarSize,
+                        typedValue,
+                        true
+                    )
+            ) {
+
+                actionBarHeight = TypedValue.complexToDimensionPixelSize(
+                    typedValue.data,
+                    activity
+                        .resources
+                        .displayMetrics
+                )
+            }
+
+        } catch (ignore: Exception) {
+        }
+
+        return actionBarHeight
     }
 
     private fun getStatusBarHeight(c: Context): Int {
