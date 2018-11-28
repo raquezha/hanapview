@@ -36,6 +36,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/colorPrimary"
                     android:focusable="true"
+                    app:fullScreen="true"
                     app:hintColor="#adadad"
                     tools:visibility="visible"/>
         </FrameLayout>

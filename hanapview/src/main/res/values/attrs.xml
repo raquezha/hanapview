@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="HanapView">
-        <attr name="backIconAlpha" />
-        <attr name="iconsAlpha" />
+
+        <attr name="backIconAlpha"/>
+        <attr name="iconsAlpha"/>
+        <attr name="fullScreen" format="boolean"/>
 
         <attr name="backIconTint" format="color" />
         <attr name="iconsTint" format="color" />

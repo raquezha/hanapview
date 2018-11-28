@@ -24,6 +24,7 @@ import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.hanap_view.view.*
 import net.raquezha.hanapview.utils.*
 
 class HanapView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
@@ -47,6 +48,13 @@ class HanapView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         private set
     var isClearingFocus = false
 
+    private fun getStatusBarHeight(c: Context): Int {
+        val resourceId = c.resources
+            .getIdentifier("status_bar_height", "dimen", "android")
+        return if (resourceId > 0) {
+            c.resources.getDimensionPixelSize(resourceId)
+        } else 0
+    }
 
     @Style
     @get:Style
@@ -85,7 +93,7 @@ class HanapView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         }
 
     var searchContainer: ViewGroup? = null
-
+    var rootView: FrameLayout? = null
     var searchEditText: EditText? = null
         private set
     var backButton: ImageButton? = null
@@ -144,6 +152,7 @@ class HanapView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         backButton = findViewById(R.id.buttonBack)
         clearButton = findViewById(R.id.buttonClear)
         bottomLine = findViewById(R.id.bottomLine)
+        rootView = findViewById(R.id.root)
     }
 
     private fun initStyle(attrs: AttributeSet?, defStyleAttr: Int) {
@@ -172,6 +181,16 @@ class HanapView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
                     ContextUtils.getPrimaryColor(context)
                 )
             )
+        }
+
+        if (typedArray.hasValue(R.styleable.HanapView_fullScreen)) {
+            val params = searchContainer?.layoutParams as FrameLayout.LayoutParams
+            params.setMargins(0, getStatusBarHeight(context), 0, 0)
+            searchContainer?.layoutParams = params
+
+            if(cardStyle == STYLE_BAR) {
+                rootView?.setBackgroundColor(Color.WHITE)
+            }
         }
 
         if (typedArray.hasValue(R.styleable.HanapView_iconsTint)) {
@@ -656,6 +675,7 @@ class HanapView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
         val CARD_ELEVATION = 2
         val BACK_ICON_ALPHA_DEFAULT = 0.87f
         val ICONS_ALPHA_DEFAULT = 0.54f
+
 
         const val STYLE_BAR = 1
         const val STYLE_CARD = 2
