@@ -57,6 +57,9 @@ class Main : AppCompatActivity() {
         params2.height = getActionBarHeight(this@Main) + statusBarHeight
         searchView?.layoutParams = params2
 
+        searchView?.searchViewListener
+        searchView?.setHint("Search The Pagkamoot Cafe Super Duper Menu")
+
     }
 
     fun getActionBarHeight(activity: Activity): Int {

@@ -11,12 +11,15 @@ import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 import android.text.TextUtils
+import android.text.method.MovementMethod
+import android.text.method.ScrollingMovementMethod
 import android.util.AttributeSet
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageButton
+import android.widget.Scroller
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.IntDef
@@ -270,6 +273,11 @@ class HanapView @JvmOverloads constructor(context: Context, attrs: AttributeSet?
                 ContextUtils.showKeyboard(searchEditText!!)
             }
         }
+
+        searchEditText?.setScroller(Scroller(context))
+        searchEditText?.setHorizontallyScrolling(true)
+        searchEditText?.maxLines = 1
+        searchEditText?.movementMethod = ScrollingMovementMethod()
     }
 
     private fun initClickListeners() {

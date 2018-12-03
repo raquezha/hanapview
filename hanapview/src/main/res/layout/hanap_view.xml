@@ -52,16 +52,17 @@
                         app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/appCompatImageView"/>
 
 
-                <EditText
+                <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/searchEditText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:background="@null"
                         android:gravity="center_vertical"
                         android:hint="Search"
+                        android:ellipsize="middle"
                         android:imeOptions="actionSearch"
                         android:inputType="textNoSuggestions"
-                        android:lines="1"
+
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="38dp"
                         android:textSize="16sp"
